@@ -1,3 +1,4 @@
+# Fabric Network
 fabric-network/identity-services/cryptos/bin/*
 fabric-network/identity-services/fabric-ca/bin/*
 fabric-network/identity-services/ldap/bin/*
@@ -7,3 +8,7 @@ fabric-network/network/chaincode/src/reward/vendor
 fabric-network/network/chaincode/src/reward/reward
 fabric-network/network/chaincode/src/reward/go.sum
 fabric-network/network/chaincode/src/reward/go.mod
+
+# Web Application
+app/node_modules/*
+app/.env
