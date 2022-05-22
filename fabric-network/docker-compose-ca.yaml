@@ -1,0 +1,119 @@
+version: '3.7'
+services:
+  ldap.org1:
+    image: osixia/openldap:latest
+    container_name: ldap-org1-server
+    hostname: ldap-org1-example
+    ports: 
+      - "389:389"
+      - "636:636"
+    volumes:
+      - ./identity-services/ldap/bin/org1/certificates:/container/service/slapd/assets/certs
+      - ./identity-services/ldap/bin/org1/slapd/database:/var/lib/ldap
+      - ./identity-services/ldap/bin/org1/slapd/config:/etc/ldap/slapd.d
+    environment: 
+      - LDAP_ORGANISATION=org1-example
+      - LDAP_DOMAIN=org1-example.com
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=admin_pass
+      - LDAP_CONFIG_PASSWORD=config_pass
+      - "LDAP_BASE_DN=dc=org1-example,dc=com"
+      - LDAP_TLS_CRT_FILENAME=server.crt
+      - LDAP_TLS_KEY_FILENAME=server.key
+      - LDAP_TLS_CA_CRT_FILENAME=org1-example.com.ca.crt
+    networks:
+      - test
+  
+  php.ldap.org1:
+    image: osixia/phpldapadmin:latest
+    container_name: php-ldap-org1-server
+    hostname: php-ldap-org1
+    ports: 
+      - "8080:80"
+    environment: 
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap-org1-example
+      - PHPLDAPADMIN_HTTPS=false
+    depends_on:
+      - ldap.org1
+    networks:
+      - test
+
+  ldap.org2:
+    image: osixia/openldap:latest
+    container_name: ldap-org2-server
+    hostname: ldap-org2-example
+    ports: 
+      - "390:389"
+      - "637:636"
+    volumes:
+      - ./identity-services/ldap/bin/org2/certificates:/container/service/slapd/assets/certs
+      - ./identity-services/ldap/bin/org2/slapd/database:/var/lib/ldap
+      - ./identity-services/ldap/bin/org2/slapd/config:/etc/ldap/slapd.d
+    environment: 
+      - LDAP_ORGANISATION=org2-example
+      - LDAP_DOMAIN=org2-example.com
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=admin_pass
+      - LDAP_CONFIG_PASSWORD=config_pass
+      - "LDAP_BASE_DN=dc=org2-example,dc=com"
+      - LDAP_TLS_CRT_FILENAME=server.crt
+      - LDAP_TLS_KEY_FILENAME=server.key
+      - LDAP_TLS_CA_CRT_FILENAME=org2-example.com.ca.crt
+    networks:
+      - test
+  
+  php.ldap.org2:
+    image: osixia/phpldapadmin:latest
+    container_name: php-ldap-org2-server
+    hostname: php-ldap-org2
+    ports: 
+      - "8081:80"
+    environment: 
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap-org2-example
+      - PHPLDAPADMIN_HTTPS=false
+    depends_on:
+      - ldap.org2
+    networks:
+      - test
+
+  ca.org1:
+    image: hyperledger/fabric-ca:1.4.8
+    container_name: ca-org1-server
+    ports:
+      - "7054:7054"
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/certificates/ca-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/certificates/priv_sk
+    volumes:
+      - ./identity-services/fabric-ca/bin/org1:/etc/hyperledger/fabric-ca-server
+      - ./identity-services/fabric-ca/bin/org1/certificates:/etc/hyperledger/fabric-ca-server/certificates
+      - ./identity-services/fabric-ca/fabric-ca-server-org1-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    depends_on:
+      - ldap.org1
+    networks:
+     - test
+
+  ca.org2:
+    image: hyperledger/fabric-ca:1.4.8
+    container_name: ca-org2-server
+    ports:
+      - "7055:7054"
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/certificates/ca-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/certificates/priv_sk
+    volumes:
+      - ./identity-services/fabric-ca/bin/org2:/etc/hyperledger/fabric-ca-server
+      - ./identity-services/fabric-ca/bin/org2/certificates:/etc/hyperledger/fabric-ca-server/certificates
+      - ./identity-services/fabric-ca/fabric-ca-server-org2-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    depends_on:
+      - ldap.org2
+    networks:
+     - test
+
+networks:
+  test:
+    name: fabric_test
