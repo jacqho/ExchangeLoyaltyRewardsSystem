@@ -12,3 +12,4 @@ fabric-network/network/chaincode/src/reward/go.mod
 # Web Application
 app/node_modules/*
 app/.env
+app/bin/*

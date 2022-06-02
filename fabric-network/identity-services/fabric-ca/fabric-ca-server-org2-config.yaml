@@ -123,7 +123,7 @@ registry:
 
   # Contains identity information which is used when LDAP is disabled
   identities:
-     - name: org2-admin
+     - name: admin
        pass: adminpw
        type: client
        affiliation: ""
@@ -135,7 +135,7 @@ registry:
           hf.GenCRL: true
           hf.Registrar.Attributes: "*"
           hf.AffiliationMgr: true
-     - name: org2-user1
+     - name: user1
        pass: userpw
        type: client
        affiliation: ""
@@ -147,7 +147,43 @@ registry:
           hf.GenCRL: true
           hf.Registrar.Attributes: "*"
           hf.AffiliationMgr: true
-     - name: org2-user2
+     - name: user2
+       pass: userpw
+       type: client
+       affiliation: ""
+       attrs:
+          hf.Registrar.Roles: "*"
+          hf.Registrar.DelegateRoles: "*"
+          hf.Revoker: true
+          hf.IntermediateCA: true
+          hf.GenCRL: true
+          hf.Registrar.Attributes: "*"
+          hf.AffiliationMgr: true
+     - name: user3
+       pass: userpw
+       type: client
+       affiliation: ""
+       attrs:
+          hf.Registrar.Roles: "*"
+          hf.Registrar.DelegateRoles: "*"
+          hf.Revoker: true
+          hf.IntermediateCA: true
+          hf.GenCRL: true
+          hf.Registrar.Attributes: "*"
+          hf.AffiliationMgr: true
+     - name: user4
+       pass: userpw
+       type: client
+       affiliation: ""
+       attrs:
+          hf.Registrar.Roles: "*"
+          hf.Registrar.DelegateRoles: "*"
+          hf.Revoker: true
+          hf.IntermediateCA: true
+          hf.GenCRL: true
+          hf.Registrar.Attributes: "*"
+          hf.AffiliationMgr: true
+     - name: user5
        pass: userpw
        type: client
        affiliation: ""

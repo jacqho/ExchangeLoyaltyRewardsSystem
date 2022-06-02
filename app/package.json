@@ -25,6 +25,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-validator": "^6.14.0",
+    "fabric-network": "^2.2.12",
     "mongoose": "^6.3.4",
     "swagger-ui-express": "^4.4.0"
   }
