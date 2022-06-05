@@ -36,7 +36,7 @@ exports.transfer = async (req, res) => {
 
 exports.view = async (req, res) => {
     try{
-        const { mspId, domain, alias } = req.body;
+        const { mspId, domain, alias } = req.query;
         const contract = await fabric.connectFabric(mspId, domain);
         const result = await contract.evaluateTransaction('ViewReward', alias);
         res.status(200).json(JSON.parse(result.toString()));

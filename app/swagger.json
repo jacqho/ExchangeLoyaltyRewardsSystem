@@ -5,52 +5,136 @@
       "version": "v1"
     },
     "paths": {
-      "/generate": {
+      "/api/reward/generate": {
         "post": {
           "operationId": "generatev1",
           "summary": "Generate Reward Point to Customer",
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+                "name": "reward",
+                "in": "body",
+                "description": "The reward amount to generate",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "required": "mspId",
+                  "properties": {
+                      "mspId": {
+                        "type": "string"
+                      },
+                      "domain": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "string"
+                      }
+                  }
+                }
+            }
+        ],
           "responses": {
             "201": {
-              "description": "201 300 response",
+              "description": "201 response",
               "examples": {
-                "application/json": "{\n    \"result\": \"success\" \n}"
+                "application/json": "{\"message\":\"CompleteGenerated\",\"data\":{\"ID\":\"org1-user1\",\"point\":\"4500\"}}"
               }
             }
           }
         }
       },
-      "/transfer": {
+      "/api/reward/transfer": {
         "post": {
           "operationId": "transferv1",
           "summary": "Transfer Reward Point to Users",
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+                "name": "reward",
+                "in": "body",
+                "description": "The reward that you want to transfer",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "required": "mspId",
+                  "properties": {
+                      "mspId": {
+                        "type": "string"
+                      },
+                      "domain": {
+                        "type": "string"
+                      },
+                      "from": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "string"
+                      }
+                  }
+                }
+            }
+        ],
           "responses": {
             "201": {
-              "description": "201 300 response",
+              "description": "201 response",
               "examples": {
-                "application/json": "{\n    \"result\": \"success\" \n}"
+                "application/json": "{\"message\":\"CompleteTransfer\",\"data\":{\"ID\":\"org1-user1\",\"Remain\":\"3500\"}}"
               }
             }
           }
         }
       },
-      "/": {
+      "/api/reward": {
         "get": {
           "operationId": "viewv1",
           "summary": "View Existing Reward Points",
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+              "name": "mspId",
+              "in": "query",
+              "description": "MSP Id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "domain",
+              "in": "query",
+              "description": "Domain",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "alias",
+              "in": "query",
+              "description": "Alias",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
           "responses": {
             "200": {
-              "description": "200 203 response",
+              "description": "200 response",
               "examples": {
-                "application/json": "{\n    \"point\": \"XX\" \n}"
+                "application/json": "{\"ID\":\"org2-user1\",\"point\":\"4600\"}"
               }
             }
           }
