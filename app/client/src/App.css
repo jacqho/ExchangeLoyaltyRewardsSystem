@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Tabs {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1rem;
+ }
+
+ ul.nav {
+  width: 80%;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #053742;
+  border-radius: 0.7rem;
+  padding-left: 0px;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+ul.nav li {
+  width: 50%;
+  padding: 1rem;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.7s;
+  border-bottom-left-radius: 0.7rem;
+  border-top-left-radius: 0.7rem;
+}
+ul.nav li:nth-child(2) {
+  border-radius: 0;
+  border-bottom-right-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+}
+ul.nav li:hover {
+  background: rgba(50, 224, 196, 0.15);
+}
+ul.nav li.active {
+  background: #053742;
+  color: white;
+}
+
+.MSPFirstTab p,
+.MSPSecondTab p {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.accordion {
+  margin: 2rem auto;
+}
+
+.accordion-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #053742;
+  color: white;
+}
+
+.accordion-title:hover {
+  background-color: #053742;
+}
+
+.accordion-title,
+.accordion-content {
+  padding: 1rem;
+  border: 1px solid;
+}
+
+.container input {
+  margin-bottom: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+.container button {
+  width: 100%;
+  height: 45px;
+}
+
+.info label{
+  padding-right: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.info input {
+  margin-bottom: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+.message p {
+  font-size: 20px;
+  text-align: left;
+}

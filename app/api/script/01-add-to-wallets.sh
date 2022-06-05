@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Setup paths alias
-export PARENT_PATH=$(builtin cd "$(pwd)/../.."; pwd)
-export APP_PATH=$PARENT_PATH/app
+export PARENT_PATH=$(builtin cd "$(pwd)/../../../"; pwd)
+export APP_PATH=$PARENT_PATH/app/api
 export WALLET_PATH=$APP_PATH/bin/wallet
 export NETWORK_PATH=$PARENT_PATH/fabric-network
 export CRYPTO_PATH=$NETWORK_PATH/identity-services/cryptos

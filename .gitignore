@@ -10,6 +10,7 @@ fabric-network/network/chaincode/src/reward/go.sum
 fabric-network/network/chaincode/src/reward/go.mod
 
 # Web Application
-app/node_modules/*
-app/.env
-app/bin/*
+app/client/node_modules/*
+app/api/node_modules/*
+app/api/.env
+app/api/bin/*
